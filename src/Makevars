@@ -1,0 +1,12 @@
+PKG_CFLAGS += -D_MONGO_USE_GETADDRINFO -DR_SAFETY_NET -DMONGOC_COMPILATION -DBSON_COMPILATION
+
+PKG_CPPFLAGS = -I. -I/mongoc-bson-yajl -I/yajl -I/.
+
+SOURCES = $(wildcard mongoc-bson-yajl/*.c yajl/*.c *.c)
+
+OBJECTS = $(SOURCES:.c=.o)
+
+all: clean $(SHLIB)
+
+clean:
+	rm -f $(OBJECTS)
