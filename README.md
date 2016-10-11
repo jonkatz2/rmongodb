@@ -26,7 +26,9 @@ Change include <bson-string.h> to include "bson-string.h"
 
 move src to same dir  
 remove refs to yajl dir  
-perl -pi -w -e 's/<yajl\//</g;' $( grep -rl '<yajl/' )  
+
+    perl -pi -w -e 's/<yajl\//</g;' $( grep -rl '<yajl/' )  
+
 change yajl includes to local files in:  
 
     mongoc-bson-yajl/bson-json.c:#include <yajl/yajl_parser.h>  
@@ -91,17 +93,20 @@ from bson-types.h:
 
 
 
-R CMD build rmongodb_0.1.1 --no-build-vignettes  
+    R CMD build rmongodb_0.1.1 --no-build-vignettes  
 
 install to test compile:  
-R CMD INSTALL rmongodb_1.8.0.tar.gz  
+    
+    R CMD INSTALL rmongodb_1.8.0.tar.gz  
 
 or just build shared lib:  
-R CMD SHLIB -o rmongodb.so a.f b.f -L/\<opt/acml3.5.0/gnu64/lib\> -l\<acml\>  
+
+    R CMD SHLIB -o rmongodb.so a.f b.f -L/\<opt/acml3.5.0/gnu64/lib\> -l\<acml\>  
 
 
 view contents of dynamic shared object:  
-nm -D --defined-only rmongodb.so  
+
+    nm -D --defined-only rmongodb.so  
 
 
 
