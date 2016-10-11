@@ -11,12 +11,17 @@ configure both libmongoc and libbson
     ./configure --enable-experimental-features=yes --with-libbson=bundled  --enable-ssl=no --enable-sasl=no  
     ? --enable-ssl=[auto/no/openssl/darwin]: prob need to find a way to do this in R for SCRAM-SHA-1 authentication.  
     ? --enable-sasl=[auto/yes/no] same as above  
-convert many <global headers> to "local headers":  
-Change include <bson.h> to include "bson.h"  
+convert many \<global headers\> to "local headers":  
+Change include \<bson.h\> to include "bson.h"  
+
     perl -pi -w -e 's/#include <bson.h>/#include "bson.h"/g;' $( grep -rl '#include <bson.h>' )  
+
 Change include <bcon.h> to include "bcon.h"  
+
     perl -pi -w -e 's/#include <bcon.h>/#include "bcon.h"/g;' $( grep -rl '#include <bcon.h>' )  
+
 Change include <bson-string.h> to include "bson-string.h"  
+
     perl -pi -w -e 's/#include <bson-string.h>/#include "bson-string.h"/g;' $( grep -rl '#include <bson-string.h>' )  
 
 move src to same dir  
@@ -31,10 +36,10 @@ change yajl includes to local files in:
     mongoc-bson-yajl/yajl_tree.h:#include <yajl/yajl_common.h>  
     mongoc-bson-yajl/yajl_parse.h:#include <yajl/yajl_common.h>  
 using:  
-perl -pi -w -e 's/#include <yajl_parser.h>/#include "yajl_parser.h"/g;' $( grep -rl '#include <yajl_parser.h>' )  
-perl -pi -w -e 's/#include <yajl_bytestack.h>/#include "yajl_bytestack.h"/g;' $( grep -rl '#include <yajl_bytestack.h>' )  
-perl -pi -w -e 's/#include <yajl_version.h>/#include "yajl_version.h"/g;' $( grep -rl '#include <yajl_version.h>' )  
-perl -pi -w -e 's/#include <yajl_common.h>/#include "yajl_common.h"/g;' $( grep -rl '#include <yajl_common.h>' )  
+    perl -pi -w -e 's/#include <yajl_parser.h>/#include "yajl_parser.h"/g;' $( grep -rl '#include <yajl_parser.h>' )  
+    perl -pi -w -e 's/#include <yajl_bytestack.h>/#include "yajl_bytestack.h"/g;' $( grep -rl '#include <yajl_bytestack.h>' )  
+    perl -pi -w -e 's/#include <yajl_version.h>/#include "yajl_version.h"/g;' $( grep -rl '#include <yajl_version.h>' )  
+    perl -pi -w -e 's/#include <yajl_common.h>/#include "yajl_common.h"/g;' $( grep -rl '#include <yajl_common.h>' )  
 
 
 
@@ -42,9 +47,9 @@ perl -pi -w -e 's/#include <yajl_common.h>/#include "yajl_common.h"/g;' $( grep 
 add vars -DMONGOC_COMPILATION -DBSON_COMPILATION to Makevars  
 
 change variables mongo -> mongoc_client_t  
+from mongo-client.h:
 
 ```
-from mongo-client.h:
 /**
  * mongoc_client_t:
  *
@@ -89,11 +94,11 @@ install to test compile:
 R CMD INSTALL rmongodb_1.8.0.tar.gz  
 
 or just build shared lib:  
-R CMD SHLIB -o rmongodb.so a.f b.f -L/<opt/acml3.5.0/gnu64/lib> -l<acml>  
+R CMD SHLIB -o rmongodb.so a.f b.f -L/\<opt/acml3.5.0/gnu64/lib\> -l\<acml\>  
 
 
 view contents of dynamic shared object:  
-nm -D --defined-only libname.so  
+nm -D --defined-only rmongodb.so  
 
 
 
