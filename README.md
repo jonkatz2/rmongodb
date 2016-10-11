@@ -28,6 +28,7 @@ move src to same dir
 remove refs to yajl dir  
 perl -pi -w -e 's/<yajl\//</g;' $( grep -rl '<yajl/' )  
 change yajl includes to local files in:  
+
     mongoc-bson-yajl/bson-json.c:#include <yajl/yajl_parser.h>  
     mongoc-bson-yajl/bson-json.c:#include <yajl/yajl_bytestack.h>  
     mongoc-bson-yajl/yajl_version.c:#include <yajl/yajl_version.h>  
@@ -35,7 +36,9 @@ change yajl includes to local files in:
     mongoc-bson-yajl/yajl_version.h:#include <yajl/yajl_common.h>  
     mongoc-bson-yajl/yajl_tree.h:#include <yajl/yajl_common.h>  
     mongoc-bson-yajl/yajl_parse.h:#include <yajl/yajl_common.h>  
+    
 using:  
+
     perl -pi -w -e 's/#include <yajl_parser.h>/#include "yajl_parser.h"/g;' $( grep -rl '#include <yajl_parser.h>' )  
     perl -pi -w -e 's/#include <yajl_bytestack.h>/#include "yajl_bytestack.h"/g;' $( grep -rl '#include <yajl_bytestack.h>' )  
     perl -pi -w -e 's/#include <yajl_version.h>/#include "yajl_version.h"/g;' $( grep -rl '#include <yajl_version.h>' )  
